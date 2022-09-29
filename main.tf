@@ -16,6 +16,7 @@ resource "aws_launch_template" "default" {
           delete_on_termination = lookup(block_device_mappings.value.ebs, "delete_on_termination", null)
           encrypted             = lookup(block_device_mappings.value.ebs, "encrypted", null)
           iops                  = lookup(block_device_mappings.value.ebs, "iops", null)
+          throughput            = lookup(block_device_mappings.value.ebs, "throughput", null)
           kms_key_id            = lookup(block_device_mappings.value.ebs, "kms_key_id", null)
           snapshot_id           = lookup(block_device_mappings.value.ebs, "snapshot_id", null)
           volume_size           = lookup(block_device_mappings.value.ebs, "volume_size", null)
@@ -131,13 +132,13 @@ locals {
     version = var.launch_template_version != "" ? var.launch_template_version : join("", aws_launch_template.default.*.latest_version)
   }
   launch_template = (
-    var.mixed_instances_policy == null ? local.launch_template_block
+  var.mixed_instances_policy == null ? local.launch_template_block
   : null)
   mixed_instances_policy = (
-    var.mixed_instances_policy == null ? null : {
-      instances_distribution = var.mixed_instances_policy.instances_distribution
-      launch_template        = local.launch_template_block
-      override               = var.mixed_instances_policy.override
+  var.mixed_instances_policy == null ? null : {
+    instances_distribution = var.mixed_instances_policy.instances_distribution
+    launch_template        = local.launch_template_block
+    override               = var.mixed_instances_policy.override
   })
 }
 
@@ -199,21 +200,21 @@ resource "aws_autoscaling_group" "default" {
     content {
       dynamic "instances_distribution" {
         for_each = (
-          mixed_instances_policy.value.instances_distribution != null ?
+        mixed_instances_policy.value.instances_distribution != null ?
         [mixed_instances_policy.value.instances_distribution] : [])
         content {
           on_demand_allocation_strategy = lookup(
-          instances_distribution.value, "on_demand_allocation_strategy", null)
+            instances_distribution.value, "on_demand_allocation_strategy", null)
           on_demand_base_capacity = lookup(
-          instances_distribution.value, "on_demand_base_capacity", null)
+            instances_distribution.value, "on_demand_base_capacity", null)
           on_demand_percentage_above_base_capacity = lookup(
-          instances_distribution.value, "on_demand_percentage_above_base_capacity", null)
+            instances_distribution.value, "on_demand_percentage_above_base_capacity", null)
           spot_allocation_strategy = lookup(
-          instances_distribution.value, "spot_allocation_strategy", null)
+            instances_distribution.value, "spot_allocation_strategy", null)
           spot_instance_pools = lookup(
-          instances_distribution.value, "spot_instance_pools", null)
+            instances_distribution.value, "spot_instance_pools", null)
           spot_max_price = lookup(
-          instances_distribution.value, "spot_max_price", null)
+            instances_distribution.value, "spot_max_price", null)
         }
       }
       launch_template {
@@ -243,12 +244,12 @@ resource "aws_autoscaling_group" "default" {
   }
 
   tags = flatten([
-    for key in keys(module.this.tags) :
-    {
-      key                 = key
-      value               = module.this.tags[key]
-      propagate_at_launch = true
-    }
+  for key in keys(module.this.tags) :
+  {
+    key                 = key
+    value               = module.this.tags[key]
+    propagate_at_launch = true
+  }
   ])
 
   lifecycle {
