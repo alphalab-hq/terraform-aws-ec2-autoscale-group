@@ -11,31 +11,8 @@ name: terraform-aws-ec2-autoscale-group
 # License of this project
 license: "APACHE2"
 # Canonical GitHub repo
-github_repo: cloudposse/terraform-aws-ec2-autoscale-group
-# Badges to display
-badges:
-  - name: "Latest Release"
-    image: "https://img.shields.io/github/release/cloudposse/terraform-aws-ec2-autoscale-group.svg"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-autoscale-group/releases/latest"
-  - name: "Slack Community"
-    image: "https://slack.cloudposse.com/badge.svg"
-    url: "https://slack.cloudposse.com"
-related:
-  - name: "terraform-aws-ec2-instance"
-    description: "Terraform module for providing a general purpose EC2 instance"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-instance"
-  - name: "terraform-aws-ec2-bastion-server"
-    description: "Terraform module to define a generic bastion host with parameterized user data"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-bastion-server"
-  - name: "terraform-aws-ec2-admin-server"
-    description: "Terraform module for providing an EC2 instance capable of running admin tasks"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-admin-server"
-  - name: "terraform-aws-ec2-instance-group"
-    description: "Terraform module for provisioning multiple general purpose EC2 hosts for stateful applications"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-instance-group"
-  - name: "terraform-aws-ec2-ami-snapshot"
-    description: "Terraform module to easily generate AMI snapshots to create replica instances"
-    url: "https://github.com/cloudposse/terraform-aws-ec2-ami-snapshot"
+github_repo: alphalab-hq/terraform-aws-ec2-autoscale-group
+
 # Short description of this project
 description: |-
   Terraform module to provision [Auto Scaling Group](https://www.terraform.io/docs/providers/aws/r/autoscaling_group.html) and [Launch Template](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html) on AWS.
